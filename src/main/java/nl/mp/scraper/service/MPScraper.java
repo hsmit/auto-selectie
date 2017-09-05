@@ -3,7 +3,6 @@ package nl.mp.scraper.service;
 import nl.mp.scraper.domain.Auto;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.File;
@@ -49,17 +48,6 @@ public class MPScraper {
 
     public  String urlBuild(MPRequest mpRequest, int currentPage, String sortBy) {
         return SITE + "/z/auto-s/" + mpRequest.buildQuery()  + "&sortBy=" + sortBy + "&currentPage=" + currentPage;
-    }
-
-
-    public Auto mapToAuto(Element article) {
-        Auto auto = new Auto();
-        auto.setNaam(article.select("span.mp-listing-title[title]").first().attr("title"));
-        auto.setUrl(article.select("h2.heading > a[href]").first().attr("href"));
-        auto.setPrijs(article.select("span.price-new").first().text());
-        auto.setBouwjaar(article.select("div.listing-priority-product-container").select("span").first().text());
-        auto.setKm(article.select("div.listing-priority-product-container").select("span").get(1).text());
-        return auto;
     }
 
     public int countPages(Document document) {
