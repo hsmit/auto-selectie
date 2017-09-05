@@ -6,7 +6,9 @@ import java.io.IOException;
 
 public class Application {
     public static void main(String[] args) throws IOException {
+        System.out.println("start");
         MPScraper scraper = new MPScraper();
-        scraper.scrape();
+        scraper.scrape("output/autos.csv");
+        System.out.println("done");
     }
 }
