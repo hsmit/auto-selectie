@@ -83,8 +83,8 @@ public class MPScraper {
             Document d = getDocument(resultPage);
             List<Auto> autos = getAutos(d);
             allAutos.addAll(autos);
-            autos.forEach(System.out::println);
         }
+        writeToCsv(allAutos, new File("output/autos.csv"));
         System.out.println("done");
     }
 
@@ -93,5 +93,28 @@ public class MPScraper {
                 .stream()
                 .map(ArticleToAutoMapper::mapToAuto)
                 .collect(Collectors.toList());
+    }
+
+    private void writeToCsv(List<Auto> autos, File filename) {
+        String headers = String.join(";", Arrays.asList("merk", "type", "naam", "prijs", "jaar", "km", "url" + "\n"));
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(filename);
+            fileWriter.append(headers);
+            for (Auto a : autos) {
+                String row = a.toString() + "\n";
+                fileWriter.append(row);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
