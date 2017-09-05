@@ -1,5 +1,7 @@
 package nl.mp.scraper.domain;
 
+import java.util.Arrays;
+
 public class Auto {
     private String naam;
     private String km;
@@ -8,6 +10,7 @@ public class Auto {
     private String url;
     private String merk;
     private String type;
+    private String SEPARATOR = ";";
 
     public String getNaam() {
         return naam;
@@ -61,7 +64,7 @@ public class Auto {
     }
 
     public String toString() {
-        return this.merk + "; " + this.type + "; " + this.naam + "; " + prijs + "; " + bouwjaar + "; "  + km + "; " + url + "";
+        return String.join(SEPARATOR, Arrays.asList(merk, type, naam, prijs, bouwjaar, km, url));
     }
 
 }
