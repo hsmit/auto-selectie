@@ -1,5 +1,7 @@
 package nl.mp.scraper;
 
+import nl.mp.scraper.service.MPScraper;
+
 import java.io.IOException;
 
 public class Application {

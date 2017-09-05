@@ -1,4 +1,4 @@
-package nl.mp.scraper;
+package nl.mp.scraper.service;
 
 import nl.mp.scraper.domain.Auto;
 import org.jsoup.Jsoup;
@@ -6,8 +6,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,7 +64,7 @@ public class MPScraper {
 
     public int countPages(Document document) {
         Elements pagination = document.select("span#pagination-pages");
-        if (pagination == null) {
+        if (pagination == null || pagination.size() == 0) {
             return 1;
         }
         return Integer.parseInt(pagination.select("span.step-over").last().text());
@@ -75,10 +78,8 @@ public class MPScraper {
 
         Document firstDocument = getDocument(firstPage);
         int pages = countPages(firstDocument);
-        System.out.println("merk;type;naam;prijs;jaar;km;url");
         for(int i = 1; i < pages; i++) {
             String resultPage = makeUri(i);
-            //System.out.println("Page " + i + ": " + resultPage);
             Document d = getDocument(resultPage);
             List<Auto> autos = getAutos(d);
             allAutos.addAll(autos);
@@ -90,7 +91,7 @@ public class MPScraper {
     private List<Auto> getAutos(Document resultDocument) {
         return resultDocument.select("article.search-result")
                 .stream()
-                .map(this::mapToAuto)
+                .map(ArticleToAutoMapper::mapToAuto)
                 .collect(Collectors.toList());
     }
 }

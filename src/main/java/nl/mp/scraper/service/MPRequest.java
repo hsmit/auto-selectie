@@ -1,4 +1,4 @@
-package nl.mp.scraper;
+package nl.mp.scraper.service;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
