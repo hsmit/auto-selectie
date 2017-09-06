@@ -1,0 +1,21 @@
+div.bar {
+    display: inline-block;
+    width: 1px;
+    height: 175px;
+    background-color: lightblue;
+    white-space: nowrap;
+    border-top: 2px solid black;
+}
+div.bor {
+    display: inline-block;
+    width: 1px;
+    height: 175px;
+    background-color: pink;
+    white-space: nowrap;
+    border-top: 2px solid red;
+}
+
+div#jaarPlot, div#prijsPlot{
+    border: 1px solid grey;
+    margin: 2px;
+}

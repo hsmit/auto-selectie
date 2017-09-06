@@ -1,0 +1,67 @@
+svg {
+    font: 10px sans-serif;
+    padding: 10px;
+}
+
+.axis,
+.frame {
+    shape-rendering: crispEdges;
+}
+
+
+.axis line {
+    stroke: #ddd;
+}
+
+.axis path {
+    display: none;
+}
+
+div.merk {
+    background-color: aliceblue;
+    width: 100px;
+    display: inline-block;
+}
+.cell text {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.frame {
+    fill: none;
+    stroke: #aaa;
+}
+
+circle {
+    fill-opacity: .7;
+}
+
+circle.hidden {
+    fill: #ccc !important;
+}
+
+p.hidden {
+    display: none;
+}
+option.hidden {
+    display: none;
+}
+
+.extent {
+    fill: #000;
+    fill-opacity: .125;
+    stroke: #fff;
+}
+
+p {
+    font-size: small;
+    margin: 1px;
+}
+
+div#table p span {
+    display: inline-block;
+    width: 60px;
+    text-align: right;
+    margin-right: 20px;
+
+}
