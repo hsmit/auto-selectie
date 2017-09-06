@@ -135,17 +135,47 @@ csv("data/autos.csv", function(error, data) {
     tableRow.append("span").text(function(d) {return "€" + d.prijs;});
     tableRow.append("a").attr("href", function(d){return d.url;}).text(function (d) {return d.naam;});
 
-
+    // show bins
+    var records = 780;
+    var heightFactor = size/records;
+    var bins = 8;
+    var barwidth = size / bins;
     d3.select("svg").append("g").attr("class", "cell")
         .attr("transform", function(d) { return "translate(" + 0 + "," + ((3 * size) + 40)  + ")"})
         .selectAll("rect")
-        .data([10,20,30])
+        .data(d3.layout.histogram().bins(210/barwidth)(d3.entries(data).map(function(d){return d.value.km})))
         .enter()
         .append("rect")
-        .attr("x", function(d, i){return padding + 20 + (10 * i)} )
+        .attr("x", function(d, i){return padding + 20 + (barwidth * i)} )
         .attr("y", padding / 2)
-        .attr("width", 10)
-        .attr("height", function(d) {return d;})
+        .attr("width", barwidth)
+        .attr("height", function(d) { return d.length * heightFactor;})
+        .style("fill", "rgb(255,0,0)");
+
+
+    d3.select("svg").append("g").attr("class", "cell")
+        .attr("transform", function(d) { return "translate(" + 230 + "," + ((3 * size) + 40)  + ")"})
+        .selectAll("rect")
+        .data(d3.layout.histogram().bins(210/barwidth)(d3.entries(data).map(function(d){return d.value.jaar})))
+        .enter()
+        .append("rect")
+        .attr("x", function(d, i){return padding + 20 + (barwidth * i)} )
+        .attr("y", padding / 2)
+        .attr("width", barwidth)
+        .attr("height", function(d) { return d.length * heightFactor;})
+        .style("fill", "rgb(255,0,0)");
+
+
+    d3.select("svg").append("g").attr("class", "cell")
+        .attr("transform", function(d) { return "translate(" + 460 + "," + ((3 * size) + 40)  + ")"})
+        .selectAll("rect")
+        .data(d3.layout.histogram().bins(210/barwidth)(d3.entries(data).map(function(d){return d.value.prijs})))
+        .enter()
+        .append("rect")
+        .attr("x", function(d, i){return padding + 20 + (barwidth * i)} )
+        .attr("y", padding / 2)
+        .attr("width", barwidth)
+        .attr("height", function(d) { return d.length * heightFactor;})
         .style("fill", "rgb(255,0,0)");
 
     cell.call(brush);
